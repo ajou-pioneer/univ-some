@@ -57,7 +57,7 @@ expo를 실행해 빌드합니다.
 $ expo start
 ```
 
-* (virtual machine의 경우) 기기를 실행하고 Expo 어플리케이션에서 withsome-plush를 선택한다.
+* (virtual machine의 경우) 기기를 실행하고 Expo 어플리케이션에서 withsome-plus를 선택한다.
 * (실단말의 경우) 기기에 [Expo Client](https://expo.io/tools#client)를 설치하고, 터미널에 띄워진 QR코드를 스캔한다.
 
 코드를 수정하고 저장하면 expo가 알아서 다시 빌드해줍니다.
