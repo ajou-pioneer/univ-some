@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class UsersCard extends React.Component {
+class UserCards extends React.Component {
   static propTypes = {
     users: PropTypes.arrayOf(PropTypes.shape({
       key: PropTypes.string.isRequired,
@@ -55,4 +55,4 @@ class UsersCard extends React.Component {
   }
 }
 
-export default UsersCard;
+export default UserCards;

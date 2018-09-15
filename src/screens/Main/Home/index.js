@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import uuidvl from 'uuid';
-import UsersCard from './components/UsersCard';
+import UserCards from './components/UserCards';
 
 const styles = StyleSheet.create({
   container: {
@@ -66,7 +66,7 @@ class Home extends React.Component {
 
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <UsersCard users={cards[0].users} />
+        <UserCards users={cards[0].users} />
       </ScrollView>
     );
   }
