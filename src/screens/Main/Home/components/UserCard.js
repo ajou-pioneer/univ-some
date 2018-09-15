@@ -83,6 +83,14 @@ class UserCard extends React.Component {
       tags,
     } = this.props;
 
+    const tagsComponent = tags.map((tag) => {
+      return (
+        <View key={uuidvl()} style={styles.tag}>
+          <Text>{tag}</Text>
+        </View>
+      );
+    });
+
     return (
       <View>
         <ImageBackground
@@ -102,13 +110,7 @@ class UserCard extends React.Component {
         <View style={styles.profileCard}>
           <Text>{bio}</Text>
           <View style={styles.tagContainer}>
-            {tags.map((tag) => {
-              return (
-                <View key={uuidvl()} style={styles.tag}>
-                  <Text>{tag}</Text>
-                </View>
-              );
-            })}
+            {tagsComponent}
           </View>
         </View>
       </View>
