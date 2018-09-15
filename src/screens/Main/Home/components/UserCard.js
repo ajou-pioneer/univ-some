@@ -11,6 +11,7 @@ import {
   Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import uuidvl from 'uuid';
 
 const deviceHeight = Dimensions.get('window').height - 160;
 
@@ -44,8 +45,23 @@ const styles = StyleSheet.create({
     textShadowRadius: 50,
   },
   profileCard: {
-    height: 100,
-    padding: 30,
+    padding: 20,
+  },
+  tagContainer: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  tag: {
+    alignSelf: 'center',
+    backgroundColor: '#FFFFFF',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginRight: 5,
+    marginBottom: 5,
+    borderRadius: 50,
   },
 });
 
@@ -54,10 +70,18 @@ class UserCard extends React.Component {
     name: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
     info: PropTypes.string.isRequired,
+    bio: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   render() {
-    const { name, img, info } = this.props;
+    const {
+      name,
+      img,
+      info,
+      bio,
+      tags,
+    } = this.props;
 
     return (
       <View>
@@ -76,7 +100,16 @@ class UserCard extends React.Component {
           </View>
         </ImageBackground>
         <View style={styles.profileCard}>
-          <Text>Lorem ipsum</Text>
+          <Text>{bio}</Text>
+          <View style={styles.tagContainer}>
+            {tags.map((tag) => {
+              return (
+                <View key={uuidvl()} style={styles.tag}>
+                  <Text>{tag}</Text>
+                </View>
+              );
+            })}
+          </View>
         </View>
       </View>
     );

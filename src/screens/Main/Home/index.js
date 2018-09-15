@@ -36,60 +36,24 @@ class Home extends React.Component {
               name: '김뫄뫄',
               img: 'https://i.imgur.com/dbh6umy.jpg',
               info: '아주대학교 미디어학과 17',
+              bio: '안녕하세요~',
+              tags: ['개발', '디자인', '게임'],
             },
             {
               key: uuidvl(),
               name: '박뫄뫄',
               img: 'https://i.imgur.com/TqhmG2S.jpg',
               info: '아주대학교 소프트웨어학과 17',
+              bio: '안녕하세요!',
+              tags: ['음악', '여행'],
             },
             {
               key: uuidvl(),
               name: '이뫄뫄',
               img: 'https://i.imgur.com/b6y3QR0.jpg',
               info: '아주대학교 사이버보안학과 17',
-            },
-          ],
-        }, {
-          users: [
-            {
-              key: uuidvl(),
-              name: '김뫄뫄',
-              img: 'https://i.imgur.com/dbh6umy.jpg',
-              info: '아주대학교 미디어학과 17',
-            },
-            {
-              key: uuidvl(),
-              name: '박뫄뫄',
-              img: 'https://i.imgur.com/TqhmG2S.jpg',
-              info: '아주대학교 소프트웨어학과 17',
-            },
-            {
-              key: uuidvl(),
-              name: '이뫄뫄',
-              img: 'https://i.imgur.com/b6y3QR0.jpg',
-              info: '아주대학교 사이버보안학과 17',
-            },
-          ],
-        }, {
-          users: [
-            {
-              key: uuidvl(),
-              name: '김뫄뫄',
-              img: 'https://i.imgur.com/dbh6umy.jpg',
-              info: '아주대학교 미디어학과 17',
-            },
-            {
-              key: uuidvl(),
-              name: '박뫄뫄',
-              img: 'https://i.imgur.com/TqhmG2S.jpg',
-              info: '아주대학교 소프트웨어학과 17',
-            },
-            {
-              key: uuidvl(),
-              name: '이뫄뫄',
-              img: 'https://i.imgur.com/b6y3QR0.jpg',
-              info: '아주대학교 사이버보안학과 17',
+              bio: '안녕하세요~!',
+              tags: [],
             },
           ],
         },
