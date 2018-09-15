@@ -28,6 +28,8 @@ class UsersCard extends React.Component {
       name: PropTypes.string.isRequired,
       img: PropTypes.string.isRequired,
       info: PropTypes.string.isRequired,
+      bio: PropTypes.string.isRequired,
+      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     })).isRequired,
   };
 
@@ -43,6 +45,8 @@ class UsersCard extends React.Component {
               name={user.name}
               img={user.img}
               info={user.info}
+              bio={user.bio}
+              tags={user.tags}
             />
           );
         })}
