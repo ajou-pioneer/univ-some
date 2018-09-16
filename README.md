@@ -6,21 +6,15 @@
 
 ### Getting started
 
-#### 1. Fork the repository
+#### 1. Clone the repository
 
-우측 상단 Fork 버튼을 눌러 저장소를 복사합니다. 이렇게 fork된 저장소를 **origin remote repository**라고 부릅니다. [원본 저장소](https://github.com/ajou-pioneer/withsome-plus)는 **upstream remote repository**라고 합니다.
-
-#### 2. Clone the repository
-
-자신의 origin remote repository를 clone해 **local repository**를 만듭니다. 명령 실행 즉시 withsome-plus 디렉토리가 만들어지니 실행 전에 디렉토리가 만들어지길 원하는 위치로 이동해야 합니다.
+repository를 clone해 **local repository**를 만듭니다. 명령 실행 즉시 withsome-plus 디렉토리가 만들어지니 실행 전에 디렉토리가 만들어지길 원하는 위치로 이동해야 합니다.
 
 ```bash
-$ git clone https://github.com/{USER}/withsome-plus.git
+$ git clone https://github.com/ajou-pioneer/withsome-plus.git
 ```
 
-> `{USER}` 부분에 자신의 깃허브 아이디를 넣어주세요.
-
-#### 3. Install dependencies
+#### 2. Install dependencies
 
 withsome-plus 디렉토리로 이동해 package.json에 명시된 node 패키지를 설치합니다.
 
@@ -29,23 +23,13 @@ $ cd withsome-plus
 $ npm install
 ```
 
-#### 4. Add upstream
+### Git-flow
 
-local repository를 upstream repository와 동기화하기 위해 로컬에 원격 저장소를 추가해줍니다.
+개발은 develop 브랜치에서 진행하며, master 브랜치는 항상 배포 가능한 상태이어야 합니다. master 브랜치로는 직접 커밋하지 않습니다.
 
-```bash
-$ git remote add upstream https://github.com/ajou-pioneer/withsome-plus.git
-```
+만약 Home screen의 기능을 구현하고 싶다면 feature-home 브랜치를 만들고 개발을 진행합니다. 구현이 완료되면 feature-home 브랜치를 develop 브랜치로 merge하고, feature-home 브랜치를 제거합니다.
 
-upstream의 내용을 가지고 오고 싶을 때는 다음 명령을 실행합니다:
-
-```bash
-$ git fetch upstream
-$ git checkout develop
-$ git merge upstream/develop
-```
-
-> 개발은 develop 브랜치에서 진행하며, master 브랜치는 항상 배포 가능한 상태이어야 합니다. master 브랜치로는 직접 커밋하지 않습니다.
+git-flow에 대한 자세한 내용은 [우린 Git-flow를 사용하고 있어요](http://woowabros.github.io/experience/2017/10/30/baemin-mobile-git-branch-strategy.html)를 참고해보세요. 또한 [git-flow를 편하게 운용하기 위한 툴](https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html)도 있습니다.
 
 ### Run
 
@@ -64,11 +48,11 @@ $ expo start
 
 ### Publish
 
-기능 구현을 마쳤다면 [upstream repo](https://github.com/ajou-pioneer/withsome-plus)에 pull request를 보내주세요.
+feature 브랜치에서 기능 구현을 마쳤다면 develop 브랜치에 pull request를 보내주세요.
 
 ![pull request](https://t1.daumcdn.net/cfile/tistory/991D10345AEDBC6D13)
 
-'compare across forks'를 누르면 origin repo를 upstream repo에 머지하도록 요청할 수 있습니다. 브랜치는 develop을 유지해주세요.
+compare를 누르면 merge할 브랜치를 선택할 수 있습니다. 베이스 브랜치는 develop을 유지해주세요.
 
 ## License
 
