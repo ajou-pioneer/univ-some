@@ -13,7 +13,7 @@ import {
 import PropTypes from 'prop-types';
 import uuidvl from 'uuid';
 
-const deviceHeight = Dimensions.get('window').height - 160;
+const deviceHeight = Dimensions.get('window').height - 120;
 
 const styles = StyleSheet.create({
   pictureCard: {
@@ -97,7 +97,7 @@ class UserCard extends React.Component {
           style={styles.profilePicture}
           imageStyle={{ resizeMode: 'cover' }}
           source={{ uri: `${img}` }}
-          borderRadius={30}
+          // borderRadius={30}
         >
           <View style={styles.pictureCard}>
             <View style={styles.pictureTopContainer} />
