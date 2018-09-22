@@ -3,38 +3,34 @@
  */
 
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import PropTypes from 'prop-types';
+import { createMaterialTopTabNavigator } from 'react-navigation';
+import MyGroups from './MyGroups';
+import Search from './Search';
+import Matched from './Matched';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingLeft: 30,
-    paddingRight: 30,
-    backgroundColor: '#FFFFFF',
+const AppNavigator = createMaterialTopTabNavigator({
+  MyGroupsScreen: { screen: MyGroups },
+  SearchScreen: { screen: Search },
+  MatchedScreen: { screen: Matched },
+}, {
+  initialRouteName: 'MyGroupsScreen',
+  lazy: true,
+  tabBarOptions: {
+    activeTintColor: '#000000',
+    inactiveTintColor: '#000000',
+    indicatorStyle: {
+      backgroundColor: '#000000',
+    },
+    style: {
+      backgroundColor: '#FFFFFF',
+    },
   },
 });
 
 class Chat extends React.Component {
-  static navigationOptions = {
-    title: '채팅',
-  };
-
-  static propTypes = {
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
-  };
-
   render() {
-    const { navigation } = this.props;
-
     return (
-      <View style={styles.container}>
-      </View>
+      <AppNavigator />
     );
   }
 }
