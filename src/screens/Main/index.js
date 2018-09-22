@@ -3,19 +3,23 @@
  */
 
 import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Home from './Home';
 import Chat from './Chat';
 import Feed from './Feed';
 import Profile from './Profile';
 
-const AppNavigator = createBottomTabNavigator({
+const AppNavigator = createMaterialBottomTabNavigator({
   HomeScreen: { screen: Home },
   ChatScreen: { screen: Chat },
   FeedScreen: { screen: Feed },
   ProfileScreen: { screen: Profile },
 }, {
   initialRouteName: 'HomeScreen',
+  shifting: false,
+  activeColor: '#000000',
+  inactiveColor: '#C0C0C0',
+  barStyle: { backgroundColor: '#FFFFFF' },
 });
 
 class Main extends React.Component {
