@@ -2,14 +2,13 @@
  * Created by Park Seong-beom on 2018.8
  */
 
-import React from 'react';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Home from './Home';
 import Chat from './Chat';
 import Feed from './Feed';
 import Profile from './Profile';
 
-const AppNavigator = createMaterialBottomTabNavigator({
+const MainStack = createMaterialBottomTabNavigator({
   HomeScreen: { screen: Home },
   ChatScreen: { screen: Chat },
   FeedScreen: { screen: Feed },
@@ -22,16 +21,9 @@ const AppNavigator = createMaterialBottomTabNavigator({
   barStyle: { backgroundColor: '#FFFFFF' },
 });
 
-class Main extends React.Component {
-  static navigationOptions = {
-    title: 'Withsome+',
-  };
+MainStack.navigationOptions = {
+  title: '유니썸',
+  headerLeft: null,
+};
 
-  render() {
-    return (
-      <AppNavigator />
-    );
-  }
-}
-
-export default Main;
+export default MainStack;
