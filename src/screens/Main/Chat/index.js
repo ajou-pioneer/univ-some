@@ -28,6 +28,10 @@ const AppNavigator = createMaterialTopTabNavigator({
 });
 
 class Chat extends React.Component {
+  static navigationOptions = {
+    title: '채팅',
+  };
+
   render() {
     return (
       <AppNavigator />
