@@ -2,15 +2,14 @@
  * Created by Park Seong-beom on 2018.8
  */
 
-import React from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation';
 import MyGroups from './MyGroups';
-import Search from './Search';
+import SearchStack from './Search';
 import Matched from './Matched';
 
-const AppNavigator = createMaterialTopTabNavigator({
+const ChatTab = createMaterialTopTabNavigator({
   MyGroupsScreen: { screen: MyGroups },
-  SearchScreen: { screen: Search },
+  SearchFlow: { screen: SearchStack },
   MatchedScreen: { screen: Matched },
 }, {
   initialRouteName: 'MyGroupsScreen',
@@ -27,16 +26,8 @@ const AppNavigator = createMaterialTopTabNavigator({
   },
 });
 
-class Chat extends React.Component {
-  static navigationOptions = {
-    title: '채팅',
-  };
+ChatTab.navigationOptions = {
+  title: '채팅',
+};
 
-  render() {
-    return (
-      <AppNavigator />
-    );
-  }
-}
-
-export default Chat;
+export default ChatTab;

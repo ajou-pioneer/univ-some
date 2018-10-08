@@ -4,13 +4,13 @@
 
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Home from './Home';
-import Chat from './Chat';
+import ChatTab from './Chat';
 import Feed from './Feed';
 import Profile from './Profile';
 
 const MainStack = createMaterialBottomTabNavigator({
   HomeScreen: { screen: Home },
-  ChatScreen: { screen: Chat },
+  ChatFlow: { screen: ChatTab },
   FeedScreen: { screen: Feed },
   ProfileScreen: { screen: Profile },
 }, {

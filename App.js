@@ -17,7 +17,7 @@ const AppNavigator = createStackNavigator({
   ProfileSettingsFlow: { screen: ProfileSettingsStack },
   MainFlow: { screen: MainStack },
 }, {
-  initialRouteName: 'ProfileSettingsFlow',
+  initialRouteName: 'MainFlow',
 });
 
 class App extends React.Component {
