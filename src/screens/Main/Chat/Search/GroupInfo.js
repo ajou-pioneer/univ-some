@@ -20,11 +20,6 @@ const styles = StyleSheet.create({
 });
 
 class GroupInfo extends React.Component {
-  static navigationOptions = {
-    title: '그룹 정보',
-    mode: 'modal',
-  };
-
   static propTypes = {
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
