@@ -126,7 +126,7 @@ class Landing extends React.Component {
                 <TouchableHighlight style={[styles.button, styles.signinButton]} onPress={() => navigation.navigate('SignInScreen')}>
                   <Text style={styles.commonButtonText}>로그인</Text>
                 </TouchableHighlight>
-                <TouchableHighlight style={[styles.button, styles.signupButton]} onPress={() => navigation.navigate('SignUpScreen')}>
+                <TouchableHighlight style={[styles.button, styles.signupButton]} onPress={() => navigation.navigate('SignUpFlow')}>
                   <Text style={styles.commonButtonText}>회원가입</Text>
                 </TouchableHighlight>
               </View>

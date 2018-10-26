@@ -77,7 +77,7 @@ class Greeting extends React.Component {
             <View style={styles.buttonContainer}>
               <WideFloatingButton
                 text="프로필 설정하기"
-                action={() => navigation.navigate('NameSettingScreen')}
+                action={() => navigation.navigate('ProfileSettingsFlow')}
               />
             </View>
           </View>

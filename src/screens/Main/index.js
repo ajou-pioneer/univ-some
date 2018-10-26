@@ -2,32 +2,44 @@
  * Created by Park Seong-beom on 2018.8
  */
 
-import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Home from './Home';
-import Chat from './Chat';
+import ChatTab from './Chat';
 import Feed from './Feed';
 import Profile from './Profile';
 
-const AppNavigator = createBottomTabNavigator({
+const MainTab = createMaterialBottomTabNavigator({
   HomeScreen: { screen: Home },
-  ChatScreen: { screen: Chat },
+  ChatFlow: { screen: ChatTab },
   FeedScreen: { screen: Feed },
   ProfileScreen: { screen: Profile },
 }, {
   initialRouteName: 'HomeScreen',
+  shifting: false,
+  activeColor: '#000000',
+  inactiveColor: '#C0C0C0',
+  barStyle: { backgroundColor: '#FFFFFF' },
 });
 
-class Main extends React.Component {
-  static navigationOptions = {
-    title: 'Withsome+',
+MainTab.navigationOptions = ({ navigation }) => {
+  const findCurentRoute = (navState) => {
+    if (navState.index !== undefined) {
+      return findCurentRoute(navState.routes[navState.index]);
+    }
+    return navState.routeName;
   };
 
-  render() {
-    return (
-      <AppNavigator />
-    );
-  }
-}
+  const routeName = findCurentRoute(navigation.state);
 
-export default Main;
+  if (routeName === 'GroupInfoScreen') {
+    return {
+      header: null,
+    };
+  }
+
+  return {
+    headerTitle: 'Univ Some',
+  };
+};
+
+export default MainTab;
