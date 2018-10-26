@@ -11,12 +11,17 @@ const SearchStack = createStackNavigator({
   GroupInfoScreen: { screen: GroupInfo },
 }, {
   initialRouteName: 'GroupListScreen',
-  mode: 'modal',
-  headerMode: 'none',
 });
 
-SearchStack.navigationOptions = {
-  title: '탐색',
+SearchStack.navigationOptions = ({ navigation }) => {
+  if (navigation.state.index > 0) {
+    return { tabBarVisible: false };
+  }
+
+  return {
+    title: '그룹 탐색',
+    header: null,
+  };
 };
 
 export default SearchStack;

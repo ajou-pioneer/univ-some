@@ -8,7 +8,7 @@ import ChatTab from './Chat';
 import Feed from './Feed';
 import Profile from './Profile';
 
-const MainStack = createMaterialBottomTabNavigator({
+const MainTab = createMaterialBottomTabNavigator({
   HomeScreen: { screen: Home },
   ChatFlow: { screen: ChatTab },
   FeedScreen: { screen: Feed },
@@ -21,9 +21,25 @@ const MainStack = createMaterialBottomTabNavigator({
   barStyle: { backgroundColor: '#FFFFFF' },
 });
 
-MainStack.navigationOptions = {
-  title: '유니썸',
-  headerLeft: null,
+MainTab.navigationOptions = ({ navigation }) => {
+  const findCurentRoute = (navState) => {
+    if (navState.index !== undefined) {
+      return findCurentRoute(navState.routes[navState.index]);
+    }
+    return navState.routeName;
+  };
+
+  const routeName = findCurentRoute(navigation.state);
+
+  if (routeName === 'GroupInfoScreen') {
+    return {
+      header: null,
+    };
+  }
+
+  return {
+    headerTitle: 'Univ Some',
+  };
 };
 
-export default MainStack;
+export default MainTab;

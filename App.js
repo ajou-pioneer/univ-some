@@ -8,14 +8,14 @@ import Landing from './src/screens/Landing';
 import SignIn from './src/screens/SignIn';
 import SignUpStack from './src/screens/SignUp';
 import ProfileSettingsStack from './src/screens/ProfileSettings';
-import MainStack from './src/screens/Main';
+import MainTab from './src/screens/Main';
 
 const AppNavigator = createStackNavigator({
   LandingScreen: { screen: Landing },
   SignInScreen: { screen: SignIn },
   SignUpFlow: { screen: SignUpStack },
   ProfileSettingsFlow: { screen: ProfileSettingsStack },
-  MainFlow: { screen: MainStack },
+  MainFlow: { screen: MainTab },
 }, {
   initialRouteName: 'MainFlow',
 });

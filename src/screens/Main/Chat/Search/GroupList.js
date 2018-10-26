@@ -79,6 +79,10 @@ const styles = StyleSheet.create({
 });
 
 class GroupList extends React.Component {
+  static navigationOptions = {
+    header: null,
+  };
+
   static propTypes = {
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
