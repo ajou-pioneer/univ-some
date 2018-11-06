@@ -7,18 +7,18 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  ScrollView,
   Animated,
   PanResponder,
 } from 'react-native';
 import uuidvl from 'uuid';
-import UserCards from './components/UserCards';
+import UserCard from './components/UserCard';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    // padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
@@ -31,6 +31,7 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
+      cardId: 0,
       cardsPan: new Animated.ValueXY(),
       cards: [
         {
@@ -85,7 +86,6 @@ class Home extends React.Component {
       onPanResponderGrant: () => { },
 
       // 터치 이후 움직일 때. (드래그)
-      // TODO: 카드를 움직일 때 scrollView가 스크롤되지 않도록 막기.
       onPanResponderMove: (evt, gestureState) => {
         const { cardsPan } = this.state;
 
@@ -119,20 +119,17 @@ class Home extends React.Component {
 
       // child component에서 responder의 사용을 막는다.
       onShouldBlockNativeResponder: () => {
-        return true;
+        return false;
       },
     });
   }
 
   render() {
-    const { cardsPan, cards } = this.state;
+    const { cardId, cardsPan, cards } = this.state;
 
     return (
       <View style={styles.container}>
-        <ScrollView
-          {...this.panResponder.panHandlers}
-          showsVerticalScrollIndicator={false}
-        >
+        <View>
           <Animated.View
             style={{
               transform: [
@@ -140,9 +137,9 @@ class Home extends React.Component {
               ],
             }}
           >
-            <UserCards users={cards[0].users} />
+            <UserCard users={cards[cardId].users} />
           </Animated.View>
-        </ScrollView>
+        </View>
       </View>
     );
   }

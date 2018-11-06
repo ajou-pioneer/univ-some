@@ -19,9 +19,14 @@ const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height - 120;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   profilePicture: {
     width: deviceWidth - 40,
-    height: deviceHeight - 80,
+    height: deviceHeight - 70,
   },
   pictureCard: {
     flex: 1,
@@ -39,37 +44,39 @@ const styles = StyleSheet.create({
 
 class UserCard extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    school: PropTypes.string.isRequired,
-    major: PropTypes.string.isRequired,
-    entryYear: PropTypes.number.isRequired,
-    bio: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
+      school: PropTypes.string.isRequired,
+      major: PropTypes.string.isRequired,
+      entryYear: PropTypes.number.isRequired,
+      bio: PropTypes.string.isRequired,
+      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })).isRequired,
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
+      userId: 0,
       isInfoTouched: false,
     };
   }
 
-  render() {
-    const {
-      name,
-      img,
-      school,
-      major,
-      entryYear,
-      bio,
-      tags,
-    } = this.props;
+  changeInfoTouched = () => {
     const { isInfoTouched } = this.state;
+    this.setState({ isInfoTouched: !isInfoTouched });
+  }
 
-    const nameText = `${name} (${entryYear})`;
-    const infoText = `${school} | ${major}`;
+  render() {
+    const { users } = this.props;
+    const { userId, isInfoTouched } = this.state;
+    const user = users[userId];
+
+    const nameText = `${user.name} (${user.entryYear})`;
+    const infoText = `${user.school} | ${user.major}`;
 
     const minimizedInfo = () => {
       const minimizedInfoStyles = StyleSheet.create({
@@ -97,7 +104,7 @@ class UserCard extends React.Component {
         <View style={minimizedInfoStyles.container}>
           <TouchableOpacity
             style={styles.pictureCard}
-            onPress={() => { this.setState({ isInfoTouched: !isInfoTouched }); }}
+            onPress={() => { this.changeInfoTouched(); }}
           />
           <View style={minimizedInfoStyles.profileCard}>
             <View style={minimizedInfoStyles.profileTextContainer}>
@@ -170,14 +177,14 @@ class UserCard extends React.Component {
       return (
         <TouchableOpacity
           style={maximizedInfoStyles.profileCard}
-          onPress={() => { this.setState({ isInfoTouched: !isInfoTouched }); }}
+          onPress={() => { this.changeInfoTouched(); }}
         >
           <View style={maximizedInfoStyles.profileTextContainer}>
             <Text style={styles.userName}>{nameText}</Text>
             <Text style={styles.userInfo}>{infoText}</Text>
-            <Text style={maximizedInfoStyles.userBio}>{bio}</Text>
+            <Text style={maximizedInfoStyles.userBio}>{user.bio}</Text>
             <View style={maximizedInfoStyles.tagContainer}>
-              {tags.map((tag) => {
+              {user.tags.map((tag) => {
                 const tagText = `#${tag}`;
                 return (
                   <View key={uuidvl()} style={maximizedInfoStyles.userTagShape}>
@@ -198,11 +205,11 @@ class UserCard extends React.Component {
     };
 
     return (
-      <View>
+      <View style={styles.container}>
         <ImageBackground
           style={styles.profilePicture}
           imageStyle={{ resizeMode: 'cover' }}
-          source={{ uri: `${img}` }}
+          source={{ uri: `${user.img}` }}
           borderRadius={30}
         >
           {isInfoTouched ? maximizedInfo() : minimizedInfo()}
