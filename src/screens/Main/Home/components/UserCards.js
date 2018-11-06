@@ -15,9 +15,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
-    // borderRadius: 30,
-    backgroundColor: '#F5F5F5',
-    // marginBottom: 30,
+    borderRadius: 30,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
@@ -27,7 +28,9 @@ class UserCards extends React.Component {
       key: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       img: PropTypes.string.isRequired,
-      info: PropTypes.string.isRequired,
+      school: PropTypes.string.isRequired,
+      major: PropTypes.string.isRequired,
+      entryYear: PropTypes.number.isRequired,
       bio: PropTypes.string.isRequired,
       tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     })).isRequired,
@@ -44,7 +47,9 @@ class UserCards extends React.Component {
               key={user.key}
               name={user.name}
               img={user.img}
-              info={user.info}
+              school={user.school}
+              major={user.major}
+              entryYear={user.entryYear}
               bio={user.bio}
               tags={user.tags}
             />
