@@ -100,7 +100,6 @@ class GroupInfo extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
     const { members } = this.state;
 
     return (
