@@ -8,111 +8,96 @@ import {
   View,
   Dimensions,
   ImageBackground,
-  Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import uuidvl from 'uuid';
+import MinUserInfoSection from './MinUserInfoSection';
+import MaxUserInfoSection from './MaxUserInfoSection';
+import UserIndicator from './UserIndicator';
+import CardIndicator from './CardIndicator';
 
+const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height - 120;
 
 const styles = StyleSheet.create({
-  pictureCard: {
+  container: {
     flex: 1,
-    padding: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   profilePicture: {
-    height: deviceHeight,
+    width: deviceWidth - 40,
+    height: deviceHeight - 70,
+    justifyContent: 'space-between',
   },
-  pictureTopContainer: {
-    flex: 9,
+  pictureCard: {
+    flex: 1,
   },
-  pictureBottomContainer: {
-    flex: 2,
-  },
-  userName: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    textShadowColor: 'rgba(0, 0, 0, 0.8)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 50,
-  },
-  userInfo: {
-    fontSize: 16,
-    color: '#FFFFFF',
-    textShadowColor: 'rgba(0, 0, 0, 0.8)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 50,
-  },
-  profileCard: {
-    padding: 20,
-  },
-  tagContainer: {
-    flexWrap: 'wrap',
+  indicatorContainer: {
     flexDirection: 'row',
-    marginTop: 10,
+    justifyContent: 'space-between',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
-  tag: {
-    alignSelf: 'center',
-    backgroundColor: '#FFFFFF',
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginRight: 5,
-    marginBottom: 5,
-    borderRadius: 50,
+  indicatorContainerMaxInfo: {
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
   },
 });
 
 class UserCard extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    info: PropTypes.string.isRequired,
-    bio: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      images: PropTypes.arrayOf(PropTypes.string).isRequired,
+      school: PropTypes.string.isRequired,
+      major: PropTypes.string.isRequired,
+      entryYear: PropTypes.number.isRequired,
+      bio: PropTypes.string.isRequired,
+      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })).isRequired,
+    userCardIndex: PropTypes.number.isRequired,
+    userImgIndex: PropTypes.number.isRequired,
   };
 
-  render() {
-    const {
-      name,
-      img,
-      info,
-      bio,
-      tags,
-    } = this.props;
+  componentWillMount = () => {
+    const { users } = this.props;
 
-    const tagsComponent = tags.map((tag) => {
-      return (
-        <View key={uuidvl()} style={styles.tag}>
-          <Text>{tag}</Text>
-        </View>
-      );
+    users.forEach((user) => {
+      user.images.push(user.images[user.images.length - 1]);
     });
+  }
+
+  renderInfoSection = (imgIdx, user) => {
+    if (imgIdx === user.images.length - 1) {
+      return <MaxUserInfoSection user={user} />;
+    }
+
+    return <MinUserInfoSection user={user} />;
+  }
+
+  render() {
+    const { users, userCardIndex, userImgIndex } = this.props;
+    const user = users[userCardIndex];
 
     return (
-      <View>
+      <View style={styles.container}>
         <ImageBackground
           style={styles.profilePicture}
           imageStyle={{ resizeMode: 'cover' }}
-          source={{ uri: `${img}` }}
-          // borderRadius={30}
+          source={{ uri: user.images[userImgIndex] }}
+          borderRadius={30}
         >
-          <View style={styles.pictureCard}>
-            <View style={styles.pictureTopContainer} />
-            <View style={styles.pictureBototmContainer}>
-              <Text style={styles.userName}>{name}</Text>
-              <Text style={styles.userInfo}>{info}</Text>
-            </View>
+          <View
+            style={[
+              styles.indicatorContainer,
+              userImgIndex === user.images.length - 1 ? styles.indicatorContainerMaxInfo : {},
+            ]}
+          >
+            <UserIndicator users={users} />
+            <CardIndicator user={user} cardIdx={userImgIndex} />
           </View>
+          {this.renderInfoSection(userImgIndex, user)}
         </ImageBackground>
-        <View style={styles.profileCard}>
-          <Text>{bio}</Text>
-          <View style={styles.tagContainer}>
-            {tagsComponent}
-          </View>
-        </View>
       </View>
     );
   }
