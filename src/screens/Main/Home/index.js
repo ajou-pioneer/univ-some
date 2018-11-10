@@ -1,24 +1,23 @@
 /**
  * Created by Park Seong-beom on 2018.8
- * TODO: 카드 스택 구현.
  */
 
 import React from 'react';
 import {
   StyleSheet,
   View,
-  ScrollView,
   Animated,
   PanResponder,
 } from 'react-native';
 import uuidvl from 'uuid';
-import UserCards from './components/UserCards';
+import UserCard from './components/UserCard';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    // padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
@@ -31,6 +30,9 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
+      groupCardIdx: 0,
+      userCardIdx: 0,
+      userImageIdx: 0,
       cardsPan: new Animated.ValueXY(),
       cards: [
         {
@@ -38,24 +40,42 @@ class Home extends React.Component {
             {
               key: uuidvl(),
               name: '김뫄뫄',
-              img: 'https://i.imgur.com/dbh6umy.jpg',
-              info: '아주대학교 미디어학과 17',
+              images: [
+                'https://i.imgur.com/dbh6umy.jpg',
+                'https://i.imgur.com/TqhmG2S.jpg',
+                'https://i.imgur.com/b6y3QR0.jpg',
+              ],
+              school: '아주대학교',
+              major: '미디어학과',
+              entryYear: 17,
               bio: '안녕하세요~',
               tags: ['개발', '디자인', '게임'],
             },
             {
               key: uuidvl(),
               name: '박뫄뫄',
-              img: 'https://i.imgur.com/TqhmG2S.jpg',
-              info: '아주대학교 소프트웨어학과 17',
+              images: [
+                'https://i.imgur.com/9PYKTfE.jpg',
+                'https://i.imgur.com/hm46fxK.jpg',
+                'https://i.imgur.com/zaarRFe.jpg',
+                'https://i.imgur.com/JGl7QIw.jpg',
+              ],
+              school: '아주대학교',
+              major: '소프트웨어학과',
+              entryYear: 18,
               bio: '안녕하세요!',
               tags: ['음악', '여행'],
             },
             {
               key: uuidvl(),
               name: '이뫄뫄',
-              img: 'https://i.imgur.com/b6y3QR0.jpg',
-              info: '아주대학교 사이버보안학과 17',
+              images: [
+                'https://i.imgur.com/ztDEqnD.jpg',
+                'https://i.imgur.com/QVDFLCA.png',
+              ],
+              school: '아주대학교',
+              major: '사이버보안학과',
+              entryYear: 16,
               bio: '안녕하세요~!',
               tags: [],
             },
@@ -79,7 +99,6 @@ class Home extends React.Component {
       onPanResponderGrant: () => { },
 
       // 터치 이후 움직일 때. (드래그)
-      // TODO: 카드를 움직일 때 scrollView가 스크롤되지 않도록 막기.
       onPanResponderMove: (evt, gestureState) => {
         const { cardsPan } = this.state;
 
@@ -106,6 +125,12 @@ class Home extends React.Component {
             },
           );
         }
+
+        if (gestureState.dy > 50) {
+          this.goPrevCard();
+        } else {
+          this.goNextCard();
+        }
       },
 
       // 다른 component가 responder가 될 때.
@@ -113,20 +138,68 @@ class Home extends React.Component {
 
       // child component에서 responder의 사용을 막는다.
       onShouldBlockNativeResponder: () => {
-        return true;
+        return false;
       },
     });
   }
 
+  goNextCard = () => {
+    const {
+      groupCardIdx,
+      userCardIdx,
+      cards,
+      userImageIdx,
+    } = this.state;
+
+    if (userImageIdx < cards[groupCardIdx].users[userCardIdx].images.length - 1) {
+      this.setState({ userImageIdx: userImageIdx + 1 });
+    } else if (userCardIdx < cards[groupCardIdx].users.length - 1) {
+      this.setState({ userCardIdx: userCardIdx + 1 });
+      this.setState({ userImageIdx: 0 });
+    } else {
+      this.setState({ userCardIdx: 0 });
+      this.setState({ userImageIdx: 0 });
+    }
+  }
+
+  goPrevCard = () => {
+    const {
+      groupCardIdx,
+      userCardIdx,
+      cards,
+      userImageIdx,
+    } = this.state;
+
+    if (userImageIdx > 0) {
+      this.setState({ userImageIdx: userImageIdx - 1 });
+    } else if (userImageIdx === 0) {
+      if (userCardIdx > 0) {
+        this.setState({ userCardIdx: userCardIdx - 1 });
+        this.setState({
+          userImageIdx: cards[groupCardIdx].users[userCardIdx - 1].images.length - 1,
+        });
+      } else if (userCardIdx === 0) {
+        const prevCardIdx = cards[groupCardIdx].users.length - 1;
+        this.setState({ userCardIdx: prevCardIdx });
+        this.setState({
+          userImageIdx: cards[groupCardIdx].users[prevCardIdx].images.length - 1,
+        });
+      }
+    }
+  }
+
   render() {
-    const { cardsPan, cards } = this.state;
+    const {
+      groupCardIdx,
+      userCardIdx,
+      userImageIdx,
+      cardsPan,
+      cards,
+    } = this.state;
 
     return (
       <View style={styles.container}>
-        <ScrollView
-          {...this.panResponder.panHandlers}
-          showsVerticalScrollIndicator={false}
-        >
+        <View {...this.panResponder.panHandlers}>
           <Animated.View
             style={{
               transform: [
@@ -134,9 +207,13 @@ class Home extends React.Component {
               ],
             }}
           >
-            <UserCards users={cards[0].users} />
+            <UserCard
+              users={cards[groupCardIdx].users}
+              userImgIndex={userImageIdx}
+              userCardIndex={userCardIdx}
+            />
           </Animated.View>
-        </ScrollView>
+        </View>
       </View>
     );
   }
