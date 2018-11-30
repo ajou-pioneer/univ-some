@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
   },
   groupContainer: {
     borderBottomWidth: 1,
-    borderBottomColor: '#DFDFDF',
+    borderBottomColor: '#EEEEEE',
     flexDirection: 'row',
-    paddingTop: 15,
-    paddingBottom: 10,
+    paddingTop: 20,
+    paddingBottom: 15,
     paddingLeft: 10,
     paddingRight: 10,
   },
@@ -66,11 +66,11 @@ class MyGroups extends React.Component {
               name: '김솨솨',
             }, {
               id: uuidvl(),
-              avatar: 'https://i.imgur.com/TqhmG2S.jpg',
+              avatar: 'https://i.imgur.com/9PYKTfE.jpg',
               name: '박솨솨',
             }, {
               id: uuidvl(),
-              avatar: 'https://i.imgur.com/b6y3QR0.jpg',
+              avatar: 'https://i.imgur.com/ztDEqnD.jpg',
               name: '최솨솨',
             },
           ],
@@ -79,11 +79,11 @@ class MyGroups extends React.Component {
           members: [
             {
               id: uuidvl(),
-              avatar: 'https://i.imgur.com/dbh6umy.jpg',
+              avatar: 'https://i.imgur.com/TqhmG2S.jpg',
               name: '김뫄뫄',
             }, {
               id: uuidvl(),
-              avatar: 'https://i.imgur.com/TqhmG2S.jpg',
+              avatar: 'https://i.imgur.com/hm46fxK.jpg',
               name: '박뫄뫄',
             },
           ],
@@ -100,7 +100,7 @@ class MyGroups extends React.Component {
             style={styles.memberImage}
             source={{ uri: member.avatar }}
             resizeMode="cover"
-            borderRadius={55}
+            borderRadius={15}
           />
           <Text style={styles.memberName}>{member.name}</Text>
         </View>
