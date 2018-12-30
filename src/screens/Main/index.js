@@ -14,7 +14,7 @@ const MainTab = createMaterialBottomTabNavigator({
   FeedScreen: { screen: Feed },
   ProfileScreen: { screen: Profile },
 }, {
-  initialRouteName: 'HomeScreen',
+  initialRouteName: 'ProfileScreen',
   shifting: false,
   activeColor: '#000000',
   inactiveColor: '#C0C0C0',
