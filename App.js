@@ -1,29 +1,22 @@
-/**
- * Created by Park Seong-beom on 2018.8
- */
-
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
-import Landing from './src/screens/Landing';
-import SignIn from './src/screens/SignIn';
-import SignUpStack from './src/screens/SignUp';
-import ProfileSettingsStack from './src/screens/ProfileSettings';
-import MainTab from './src/screens/Main';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/es/integration/react';
+// PersistGate란 앱로딩이 앱이 전체 로딩되기 전까지는 앱을 보여주지 않는 것처럼, 디스크에서 리덕스 스토어를 불러오기전까지는 앱을 보여주지 않는다.
+import configureStore from './redux/configureStore';
+import AppContainer from './components/AppContainer';
+const { persistor, store } = configureStore(); // 함수로 선언했으므로... 뒤에 ()
 
-const AppNavigator = createStackNavigator({
-  LandingScreen: { screen: Landing },
-  SignInScreen: { screen: SignIn },
-  SignUpFlow: { screen: SignUpStack },
-  ProfileSettingsFlow: { screen: ProfileSettingsStack },
-  MainFlow: { screen: MainTab },
-}, {
-  initialRouteName: 'MainFlow',
-});
+// store.dispatch({type:"LOG_OUT" });
 
 class App extends React.Component {
   render() {
     return (
-      <AppNavigator />
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <AppContainer />
+        </PersistGate>
+      </Provider>
+
     );
   }
 }
