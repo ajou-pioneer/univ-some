@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
   },
   groupContainer: {
     borderBottomWidth: 1,
-    borderBottomColor: '#DFDFDF',
-    paddingTop: 15,
-    paddingBottom: 10,
+    borderBottomColor: '#EEEEEE',
+    paddingTop: 20,
+    paddingBottom: 15,
     paddingLeft: 10,
     paddingRight: 10,
   },
@@ -56,25 +56,26 @@ const styles = StyleSheet.create({
   },
   tagContainer: {
     flexDirection: 'row',
-    marginTop: 5,
+    marginTop: 15,
     paddingLeft: 10,
     paddingRight: 10,
   },
   tag: {
     alignSelf: 'center',
-    backgroundColor: '#DFDFDF',
+    backgroundColor: '#EEEEEE',
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
     marginRight: 5,
     marginBottom: 5,
-    borderRadius: 10,
+    borderRadius: 99,
     justifyContent: 'center',
     alignContent: 'center',
   },
   tagText: {
-    fontSize: 10,
+    color: '#8E8E93',
+    fontSize: 12,
   },
 });
 
@@ -103,11 +104,11 @@ class GroupList extends React.Component {
               name: '김솨솨',
             }, {
               id: uuidvl(),
-              avatar: 'https://i.imgur.com/TqhmG2S.jpg',
+              avatar: 'https://i.imgur.com/9PYKTfE.jpg',
               name: '박솨솨',
             }, {
               id: uuidvl(),
-              avatar: 'https://i.imgur.com/b6y3QR0.jpg',
+              avatar: 'https://i.imgur.com/ztDEqnD.jpg',
               name: '최솨솨',
             },
           ],
@@ -117,11 +118,11 @@ class GroupList extends React.Component {
           members: [
             {
               id: uuidvl(),
-              avatar: 'https://i.imgur.com/dbh6umy.jpg',
+              avatar: 'https://i.imgur.com/TqhmG2S.jpg',
               name: '김뫄뫄',
             }, {
               id: uuidvl(),
-              avatar: 'https://i.imgur.com/TqhmG2S.jpg',
+              avatar: 'https://i.imgur.com/hm46fxK.jpg',
               name: '박뫄뫄',
             },
           ],
@@ -140,7 +141,7 @@ class GroupList extends React.Component {
             style={styles.memberImage}
             source={{ uri: member.avatar }}
             resizeMode="cover"
-            borderRadius={55}
+            borderRadius={15}
           />
           <Text style={styles.memberName}>{member.name}</Text>
         </View>
@@ -173,7 +174,7 @@ class GroupList extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.controlContainer}>
-          <TextInput style={styles.searchControl} placeholder="🔍 그룹 ID 검색" />
+          <TextInput style={styles.searchControl} placeholder="그룹 ID를 입력하세요" />
         </View>
         <ScrollView>
           {userGroups.map((group) => {

@@ -2,9 +2,8 @@
  * Created by Park Seong-beom on 2018.8
  */
 
-import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import Landing from '../screens/Landing'
+import Landing from '../screens/Landing';
 import SignIn from '../screens/SignIn';
 import SignUpStack from './SignUpNavigation';
 import ProfileSettingsStack from './ProfileSettingNavigation';
@@ -17,7 +16,7 @@ const LoggedOutNavigation = createStackNavigator({
   ProfileSettingsFlow: { screen: ProfileSettingsStack },
   MainFlow: { screen: MainTab },
 }, {
-  initialRouteName: 'LandingScreen',
+  initialRouteName: 'SignUpFlow',
 });
 
 export default LoggedOutNavigation;

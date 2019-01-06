@@ -6,18 +6,43 @@ import React from 'react';
 import {
   StyleSheet,
   View,
+  ScrollView,
+  Image,
+  Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import uuidvl from 'uuid';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    padding: 15,
+  },
+  groupContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#EEEEEE',
+    flexDirection: 'row',
+    paddingTop: 20,
+    paddingBottom: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  memberContainer: {
+    paddingLeft: 5,
+    paddingRight: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  memberImage: {
+    height: 55,
+    width: 55,
+  },
+  memberName: {
+    marginTop: 5,
   },
 });
 
-class Matched extends React.Component {
+class MyGroups extends React.Component {
   static navigationOptions = {
     title: '매칭된 그룹',
   };
@@ -28,11 +53,78 @@ class Matched extends React.Component {
     }).isRequired,
   };
 
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userGroups: [
+        {
+          id: uuidvl(),
+          members: [
+            {
+              id: uuidvl(),
+              avatar: 'https://i.imgur.com/dbh6umy.jpg',
+              name: '김솨솨',
+            }, {
+              id: uuidvl(),
+              avatar: 'https://i.imgur.com/9PYKTfE.jpg',
+              name: '박솨솨',
+            }, {
+              id: uuidvl(),
+              avatar: 'https://i.imgur.com/ztDEqnD.jpg',
+              name: '최솨솨',
+            },
+          ],
+        }, {
+          id: uuidvl(),
+          members: [
+            {
+              id: uuidvl(),
+              avatar: 'https://i.imgur.com/TqhmG2S.jpg',
+              name: '김뫄뫄',
+            }, {
+              id: uuidvl(),
+              avatar: 'https://i.imgur.com/hm46fxK.jpg',
+              name: '박뫄뫄',
+            },
+          ],
+        },
+      ],
+    };
+  }
+
+  renderUserGroup = (group) => {
+    const listItems = group.members.map((member) => {
+      return (
+        <View style={styles.memberContainer} key={member.id}>
+          <Image
+            style={styles.memberImage}
+            source={{ uri: member.avatar }}
+            resizeMode="cover"
+            borderRadius={15}
+          />
+          <Text style={styles.memberName}>{member.name}</Text>
+        </View>
+      );
+    });
+
     return (
-      <View style={styles.container} />
+      <View style={styles.groupContainer} key={group.id}>
+        {listItems}
+      </View>
+    );
+  }
+
+  render() {
+    const { userGroups } = this.state;
+
+    return (
+      <ScrollView style={styles.container}>
+        {userGroups.map((group) => {
+          return this.renderUserGroup(group);
+        })}
+      </ScrollView>
     );
   }
 }
 
-export default Matched;
+export default MyGroups;
