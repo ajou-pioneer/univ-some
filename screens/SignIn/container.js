@@ -10,7 +10,7 @@ class Container extends Component {
     isSubmitting: false
   };
   render() {
-    console.log("isSubmitting : "+this.state.isSubmitting);
+    console.log("isSubmitting : " + this.state.isSubmitting);
     return (
       <SignIn
         {...this.state}

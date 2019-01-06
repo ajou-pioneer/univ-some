@@ -14,22 +14,17 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   button: {
     width: '100%',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#36b1bf',
     paddingTop: 15,
     paddingBottom: 15,
-    borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: '#D0D0D0',
-    borderBottomWidth: 1,
-    shadowColor: '#000000',
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 1,
+    borderColor: '#36b1bf',
   },
   buttonText: {
     fontSize: 17,
-    color: '#000000',
+    fontWeight: 'bold',
+    color: '#ffffff',
   },
 });
 

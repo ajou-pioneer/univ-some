@@ -1,6 +1,5 @@
 /**
  * Created by Park Seong-beom on 2018.8
- * FIXME: components 구조 리팩토링
  */
 
 import React from 'react';
@@ -8,7 +7,6 @@ import {
   StyleSheet,
   View,
   Text,
-  ImageBackground,
   Image,
   TouchableHighlight,
 } from 'react-native';
@@ -17,78 +15,86 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  backgroundImage: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
-  contentContainer: {
-    flex: 1,
-    justifyContent: 'space-between',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
     paddingLeft: 30,
     paddingRight: 30,
+    backgroundColor: '#f5f5f5',
   },
-  logoGraphic: {
-    width: 100,
-    height: 100,
-  },
-  logoType: {
-    color: '#FFFFFF',
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  topContainer: {
-    width: '100%',
-    alignItems: 'center',
+  titleContainer: {
     justifyContent: 'center',
-    marginTop: 200,
+    alignItems: 'flex-start',
+    flex: 3,
+  },
+  copyText: {
+    fontSize: 16,
+    marginTop: 2,
+    color: '#8e8e93',
+  },
+  nameContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+    alignItems: 'flex-end',
+  },
+  nameText: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    zIndex: 999,
+  },
+  subnameText: {
+    fontSize: 16,
+    marginLeft: 5,
+  },
+  marker: {
+    position: 'absolute',
+    top: 20,
+    backgroundColor: '#54d9cd',
+    width: 67,
+    height: 10,
+    zIndex: 0,
   },
   buttonContainer: {
-    width: '100%',
+    flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 50,
   },
-  commonButtonContainer: {
+  signinContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginTop: 10,
   },
   button: {
     paddingTop: 15,
     paddingBottom: 15,
-    borderRadius: 100,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: '#303030',
-    borderBottomWidth: 1,
-    shadowColor: '#000000',
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 1,
+    marginBottom: 15,
   },
   facebookButton: {
-    width: '100%',
     backgroundColor: '#4267B2',
   },
-  facebookButtonText: {
-    color: '#FFFFFF',
+  kakaoButton: {
+    backgroundColor: '#FAE100',
   },
-  signinButton: {
-    width: '49%',
+  emailButton: {
     backgroundColor: '#FFFFFF',
-    marginRight: '1%',
   },
-  signupButton: {
-    width: '49%',
-    backgroundColor: '#FFFFFF',
-    marginLeft: '1%',
+  buttonText: {
+    fontSize: 13,
+    marginLeft: 10,
   },
-  commonButtonText: {
-    color: '#000000',
+  signinText: {
+    fontSize: 11,
+    textDecorationLine: 'underline',
+    color: '#555555',
+  },
+  signincopyText: {
+    fontSize: 11,
+    color: '#555555',
+  },
+  iconImage: {
+    width: 20,
+    height: 20,
   },
 });
 
@@ -108,31 +114,41 @@ class Landing extends React.Component {
 
     return (
       <View style={styles.container}>
-        <ImageBackground
-          style={styles.backgroundImage}
-          imageStyle={{ resizeMode: 'stretch' }}
-          source={{ uri: 'https://thechive.files.wordpress.com/2017/10/your-phone-called-it-wants-a-new-wallpaper-36-photos-26.jpg?quality=85&strip=info&w=600' }}
-        >
-          <View style={styles.contentContainer}>
-            <View style={styles.topContainer}>
-              <Image style={styles.logoGraphic} source={require('../../assets/logo.png')} />
-              <Text style={styles.logoType}>Withsome+</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-              <TouchableHighlight style={[styles.button, styles.facebookButton]}>
-                <Text style={styles.facebookButtonText}>페이스북으로 로그인</Text>
-              </TouchableHighlight>
-              <View style={styles.commonButtonContainer}>
-                <TouchableHighlight style={[styles.button, styles.signinButton]} onPress={() => navigation.navigate('SignInScreen')}>
-                  <Text style={styles.commonButtonText}>로그인</Text>
-                </TouchableHighlight>
-                <TouchableHighlight style={[styles.button, styles.signupButton]} onPress={() => navigation.navigate('SignUpFlow')}>
-                  <Text style={styles.commonButtonText}>회원가입</Text>
-                </TouchableHighlight>
-              </View>
-            </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.copyText}>대학생이</Text>
+          <Text style={styles.copyText}>썸타는 방법</Text>
+          <View style={styles.nameContainer}>
+            <Text style={styles.nameText}>유니썸</Text>
+            <Text style={styles.subnameText}>UNIVSOME</Text>
+            <View style={styles.marker} />
           </View>
-        </ImageBackground>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight style={[styles.button, styles.facebookButton]}>
+            <View style={{ flexDirection: 'row' }}>
+              <Image style={styles.iconImage} source={require('../../assets/Landing/facebook.png')} />
+              <Text style={[styles.buttonText, { color: '#FFFFFF' }]}>페이스북으로 시작</Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight style={[styles.button, styles.kakaoButton]}>
+            <View style={{ flexDirection: 'row' }}>
+              <Image style={styles.iconImage} source={require('../../assets/Landing/kakao.png')} />
+              <Text style={[styles.buttonText, { color: '#381E1F' }]}>카카오톡으로 시작</Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight style={[styles.button, styles.emailButton]} onPress={() => navigation.navigate('SignUpFlow')}>
+            <View style={{ flexDirection: 'row' }}>
+              <Image style={styles.iconImage} source={require('../../assets/Landing/email.png')} />
+              <Text style={[styles.buttonText, { color: '#000000' }]}>이메일 주소로 시작</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
+        <View style={styles.signinContainer}>
+          <Text style={styles.signincopyText}>이미 회원이라면?</Text>
+          <TouchableHighlight onPress={() => navigation.navigate('SignInScreen')}>
+            <Text style={styles.signinText}>로그인</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }

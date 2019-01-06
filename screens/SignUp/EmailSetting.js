@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   formContainer: {
-    flex: 9,
+    flex: 8,
     justifyContent: 'center',
   },
   buttonContainer: {
