@@ -39,19 +39,38 @@ class PasswordSetting extends React.Component {
     }).isRequired,
   };
 
+  constructor() {
+    super();
+
+    this.state = {
+      isValid: false,
+    };
+  }
+
+  checkValidation = (e) => {
+    // 적절한 형식 검증 로직 필요.
+    if (e.target.value !== '') {
+      this.setState({ isValid: true });
+    } else {
+      this.setState({ isValid: false });
+    }
+  }
+
   render() {
     const { navigation } = this.props;
+    const { isValid } = this.state;
 
     return (
       <View style={styles.container}>
         <View style={styles.formContainer}>
-          <InputForm title="비밀번호" holder="6자 이상 입력해주세요" secure />
-          <InputForm title="비밀번호 확인" holder="비밀번호를 다시 입력해주세요" secure />
+          <InputForm title="비밀번호" holder="6자 이상 입력해주세요" changefunction={this.checkValidation} secure />
+          <InputForm title="비밀번호 확인" holder="비밀번호를 다시 입력해주세요" changefunction={this.checkValidation} secure />
         </View>
         <View style={styles.buttonContainer}>
           <WideFloatingButton
             text="가입하기!"
             action={() => navigation.navigate('GreetingScreen')}
+            isValid={isValid}
           />
         </View>
       </View>

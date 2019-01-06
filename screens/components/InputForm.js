@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   controlText: {
-    fontSize: 20,
+    fontSize: 21,
     fontWeight: 'bold',
     zIndex: 999,
   },
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 15,
     backgroundColor: '#54d9cd',
-    width: 75,
     height: 10,
     zIndex: 0,
   },
@@ -89,7 +88,7 @@ class InputForm extends React.Component {
           <Text style={styles.controlText}>
             {title}
           </Text>
-          <View style={styles.marker} />
+          <View style={[styles.marker, { width: title.length * 20 }]} />
         </View>
         <TextInput
           style={styles.control}
@@ -99,8 +98,8 @@ class InputForm extends React.Component {
           maxLength={length}
           multiline={multiline}
           value={inputDate}
-          autoCapitalize={"none"}
-          onChangeText={changefunction}
+          autoCapitalize="none"
+          onChange={changefunction}
         />
         {specText}
       </View>

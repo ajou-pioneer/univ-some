@@ -30,14 +30,18 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 20,
   },
   resendText: {
+    alignSelf: 'flex-end',
     textDecorationLine: 'underline',
+    fontSize: 12,
+    marginBottom: 20,
+    color: '#919191',
   },
   infoText: {
-    marginTop: 20,
+    fontSize: 10,
     textAlign: 'center',
+    color: '#919191',
   },
 });
 
@@ -52,22 +56,42 @@ class EmailVerification extends React.Component {
     }).isRequired,
   };
 
+  constructor() {
+    super();
+
+    this.state = {
+      isValid: false,
+    };
+  }
+
+  checkValidation = (e) => {
+    // 적절한 형식 검증 로직 필요.
+    if (e.target.value !== '') {
+      this.setState({ isValid: true });
+    } else {
+      this.setState({ isValid: false });
+    }
+  }
+
   render() {
     const { navigation } = this.props;
+    const { isValid } = this.state;
 
     return (
       <View style={styles.container}>
         <View style={styles.formContainer}>
-          <InputForm title="4자리 인증번호" length={4} type="numeric" />
+          <InputForm title="이메일 인증" length={4} type="numeric" changefunction={this.checkValidation} />
           <View style={styles.textContainer}>
             <Text style={styles.resendText}>인증번호 다시 보내기</Text>
-            <Text style={styles.infoText}>이메일을 인증하면 이용약관과 개인정보취급방침에 동의하는 것으로 간주합니다.</Text>
+            <Text style={styles.infoText}>이메일을 인증하면 개인정보 취급방침과</Text>
+            <Text style={styles.infoText}>이용약관에 동의하게 됩니다.</Text>
           </View>
         </View>
         <View style={styles.buttonContainer}>
           <WideFloatingButton
             text="확인"
             action={() => navigation.navigate('PasswordSettingScreen')}
+            isValid={isValid}
           />
         </View>
       </View>
