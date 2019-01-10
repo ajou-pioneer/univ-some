@@ -11,25 +11,21 @@ import React from 'react';
 import {
   StyleSheet,
   View,
+  ScrollView,
   Text,
-  TextInput,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import uuidvl from 'uuid';
 import Accordion from 'react-native-collapsible/Accordion';
 import WideFloatingButton from '../components/WideFloatingButton';
-import TextStyle from '../styles/TextStyle';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingLeft: 30,
-    paddingRight: 30,
     backgroundColor: '#FFFFFF',
   },
   formContainer: {
     flex: 9,
-    paddingTop: 90,
   },
   searchControl: {
     width: '100%',
@@ -41,34 +37,41 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 2,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
   },
   accordionContainer: {
     marginTop: 10,
   },
   accordionTitleContainer: {
-    borderColor: '#D0D0D0',
-    borderWidth: 1,
-    padding: 10,
+    borderColor: '#EEEEEE',
+    borderTopWidth: 1,
+    padding: 20,
   },
   accordionContentContainer: {
     flexWrap: 'wrap',
-    borderColor: '#D0D0D0',
-    borderWidth: 1,
+    backgroundColor: '#FDFDFD',
     padding: 10,
     flexDirection: 'row',
   },
   tag: {
     alignSelf: 'center',
-    backgroundColor: '#D0D0D0',
+    backgroundColor: '#FFFFFF',
     paddingTop: 5,
     paddingBottom: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginRight: 5,
-    marginBottom: 5,
+    paddingLeft: 15,
+    paddingRight: 15,
+    marginRight: 10,
+    marginBottom: 15,
     borderRadius: 50,
+    borderColor: '#DDDDDD',
+    borderWidth: 1,
     justifyContent: 'center',
     alignContent: 'center',
+  },
+  tagText: {
+    color: '#8E8E93',
   },
 });
 
@@ -121,7 +124,7 @@ class TagSetting extends React.Component {
         {section.tags.map((tag) => {
           return (
             <View style={styles.tag} key={uuidvl()}>
-              <Text style={styles.tagText}>{tag}</Text>
+              <Text style={styles.tagText}>{`#${tag}`}</Text>
             </View>
           );
         })}
@@ -134,10 +137,8 @@ class TagSetting extends React.Component {
     const { accordionSections } = this.state;
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.formContainer}>
-          <Text style={TextStyle.h1Text}>태그</Text>
-          <TextInput style={styles.searchControl} placeholder="태그 검색" />
           <View style={styles.accordionContainer}>
             <Accordion
               sections={accordionSections}
@@ -152,7 +153,7 @@ class TagSetting extends React.Component {
             action={() => navigation.navigate('MainFlow')}
           />
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
